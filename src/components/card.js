@@ -43,8 +43,25 @@ authorNameSpan.textContent = article.authorName
 return card
 
 }
+import axios from "axios"
 
 const cardAppender = (selector) => {
+  axios.get("http://localhost:5000/api/articles")
+  .then(resp =>{
+    const container = document.querySelector(selector)
+    const articleList = resp.data.articles
+    for(const i in articleList){
+      const article  = articleList[i];
+      article.forEach(elem => {
+        const newCard = Card(elem)
+        container.appendChild(newCard)
+      })
+    }
+  })
+  .catch(err =>
+    console.error(err)
+  )}
+    
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -53,6 +70,8 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
-}
+
 
 export { Card, cardAppender }
+
+
