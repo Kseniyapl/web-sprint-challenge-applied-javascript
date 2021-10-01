@@ -41,12 +41,10 @@ const Header = (title, date, temp) => {
   //
 const headerAppender = (selector) => {
 
+let test = Header('foo', 'March 1', '123')
 
-
-
-
-
-
+let headers = document.querySelector(selector);
+headers.appendChild(test)
 }
 
 export { Header, headerAppender }
